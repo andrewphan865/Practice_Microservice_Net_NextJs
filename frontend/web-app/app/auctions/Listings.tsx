@@ -9,20 +9,21 @@ import Filters from './Filters';
 import { useParamsStore } from '@/hooks/useParamsStore';
 import { shallow } from 'zustand/shallow';
 import qs from 'query-string';
-
-import { getData } from '../actions/auctionAction';
 import EmptyFilter from '../components/EmptyFilter';
+import { getData } from '../actions/auctionAction';
 
 export default function Listings() {
   const [data, setData] = useState<PagedResult<Auction>>();
-  const params = useParamsStore(state => ({
+  const params = useParamsStore((state: { pageNumber: any; pageSize: any; searchTerm: any; orderBy: any; filterBy: any; seller: any; winner: any; }) => ({
     pageNumber: state.pageNumber,
     pageSize: state.pageSize,
     searchTerm: state.searchTerm,
     orderBy: state.orderBy,
-    filterBy: state.filterBy
+    filterBy: state.filterBy,
+    seller: state.seller,
+    winner: state.winner
   }), shallow)
-  const setParams = useParamsStore(state => state.setParams);
+  const setParams = useParamsStore((state: { setParams: any; }) => state.setParams);
   const url = qs.stringifyUrl({ url: '', query: params })
 
   function setPageNumber(pageNumber: number) {
