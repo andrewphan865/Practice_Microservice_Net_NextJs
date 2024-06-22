@@ -34,13 +34,14 @@ public static class Config
             {
                 ClientId = "nextApp",
                 ClientName = "nextApp",
-                ClientSecrets = {new Secret("secret".Sha256())},                 //keep thing nice and simple
+                ClientSecrets = {new Secret("secret".Sha256())},                 //TODO: updae when deploy, need to be same as Client route.ts DuendeIdentityServer6
                 AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
                 RequirePkce = false,
                 RedirectUris = {"http://localhost:3000/api/auth/callback/id-server"},
                 AllowOfflineAccess = true,
                 AllowedScopes = {"openid", "profile", "auctionApp"},
-                AccessTokenLifetime = 3600*24*30                                // 30 days
+                AccessTokenLifetime = 3600*24*30,                                // 30 days
+                AlwaysIncludeUserClaimsInIdToken =  true
             }
         };
 }
