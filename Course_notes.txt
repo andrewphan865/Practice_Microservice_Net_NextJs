@@ -91,7 +91,21 @@
 	#rebuild the image when code change
 	docker compose build auction-svc
 	docker compose up -d
++++++Testing++++++++++
 
+- UnitTests
+
+	dotnet new xunit -o tests/AuctionService.UnitTests
+	dotnet sln add tests/AuctionService.UnitTests
+	cd tests/AuctionService.UnitTests
+	dotnet add reference ../../src/AuctionService
+	
+- IntegrationTests
+	dotnet new xunit -o tests/AuctionService.IntegrationTests
+	dotnet sln add tests/AuctionService.IntegrationTests
+	cd tests/AuctionService.IntegrationTests
+	dotnet add reference ../../src/AuctionService
+	
 +++++Frontend++++++++++
 https://nextjs.org/docs/getting-started/installation
 	- Extentions
