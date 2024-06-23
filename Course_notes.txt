@@ -62,7 +62,7 @@
 	-Create Notification service
 	dotnet new web -o src/NotificationService
 	dotnet sln add src/NotificationService
-		cd src/SearchService
+	cd src/NotificationService
 	dotnet add reference ../../src/Contracts
 - Migrate db
 	cd src/AuctionService
@@ -110,6 +110,8 @@ https://nextjs.org/docs/getting-started/installation
 		npm install react-hook-form react-datepicker		https://react-hook-form.com/get-started# 
 		npm install -D @types/react-datepicker
 		npm i react-hot-toast
+		npm instal date-fns
+		npm install @microsoft/signalr
 		
 
 	- Create project

@@ -10,7 +10,7 @@ type Props = {
     id: string
 }
 
-export default function DeleteButton({id}: Props) {
+export default function DeleteButton({ id }: Props) {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
@@ -22,7 +22,7 @@ export default function DeleteButton({id}: Props) {
                 router.push('/');
             }).catch(error => {
                 toast.error(error.status + ' ' + error.message)
-            }).finally(() => setLoading(false)) 
+            }).finally(() => setLoading(false))
     }
 
     return (
