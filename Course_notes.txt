@@ -1,0 +1,129 @@
+-Setting enviroment
+	- VS Code
+		Extension:  C# Dev Kit, vscode-proto3		
+		
+		If the VS Code has problem try:
+			opt1: Ctrl + Shift + P -> Developer: reload Window
+			opt2: right click C# Dev Kit extension -> Switch to Release Version
+			
+		If there is no option to run in the debug mode	
+		.Net: Generate Assets for Build and Debug
+		
+	- Install global dotnet ef
+	
+		dotnet tool install dotnet-ef -g
+		dotnet tool update dotnet-ef -g
+		dotnet tool update dotnet-ef -g --version 7.0.8
+		
++++++++Backend+++++++++++++
+
+- Create backend project
+	
+	mkdir Carsties
+	cd Carsties
+	dotnet new sln
+	
+	- Create Services
+	
+	dotnet new webapi -o src/AuctionService
+	dotnet new webapi -o src/AuctionService --use-controllers # for .Net8
+	dotnet sln add src/AuctionService
+	
+	dotnet new webapi -o src/SearchService
+	dotnet new webapi -o src/AuctionService --use-controllers # for .Net8
+	dotnet sln add src/SearchService
+	
+	dotnet new classlib -o src/Contracts
+	dotnet sln add src/Contracts
+	cd src/AuctionService
+	dotnet add reference ../../src/Contracts
+	cd src/SearchService
+	dotnet add reference ../../src/Contracts
+	
+	
+	
+	- Create IdentityServer project
+	dotnet new --install Duende.IdentityServer.Templates
+	dotnet new --install Duende.IdentityServer.Templates::6.3.0 # for specific version
+	dotnet new isaspid -o src/IdentityService
+	dotnet sln add src/IdentityService
+
+   - Create Gateway Services
+    dotnet new web -o src/GatewayService
+	dotnet sln add src/GatewayService
+	
+	- Create Bidding Services
+	dotnet new webapi -o src/BiddingService
+	dotnet sln add src/BiddingService
+	cd src/BiddingService
+	dotnet add reference ../../src/Contracts
+	
+- Migrate db
+	cd src/AuctionService
+	
+	dotnet ef migrations add "InitialCreate" -o Data/Migrations
+	# update ef database
+	dotnet ef database update
+	
+	# drop database
+	dotnet ef database drop
+
+- Docker
+	cd to docker-compose dir
+	
+	docker compose up -d
+
+	docker volumn list
+	docker compose down
+	
+	#build docker image
+	docker build -f src/AuctionService/Dockerfile -t testing123 .
+	 #f is file , t is tag , . is period of the time
+	docker run testing123
+	
+	
+	#rebuild the image when code change
+	docker compose build auction-svc
+	docker compose up -d
+
++++++Frontend++++++++++
+https://nextjs.org/docs/getting-started/installation
+	- Extentions
+		ES7+ React/Redux/React-Native snippets
+		Tailwind Css IntelliSense
+		Auto Close Tag
+
+	- packages
+		npm install react-icons
+		npm install -D @tailwindcss/aspect-ratio
+		npm i react-countdown
+		npm i flowbite-react   								#nextjs compoent which using Tailwind css https://flowbite-react.com/ 
+		#or we can use NextUI
+		npm install zustand query-string    				#state management https://zustand-demo.pmnd.rs/		
+		npm install next-auth								# nextjs Auth https://next-auth.js.org/
+		npm install react-hook-form react-datepicker		https://react-hook-form.com/get-started# 
+		npm install -D @types/react-datepicker
+		npm i react-hot-toast
+		
+
+	- Create project
+		cd to Carsties
+		mkdir frontend
+		cd frontend
+		
+		npx create-next-app@latest
+
+	- Tricks
+		add 'use client'to switch file to client component
+		update next.config.mjs'file to see more logs
+		
+		https://flexboxfroggy.com/to play around with flex
+		https://react-icons.github.io/react-icons/ for icons
+		
+
+
+- Add git
+	cd Carsties
+	git init
+	dotnet new gitignore
+	
