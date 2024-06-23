@@ -23,7 +23,7 @@
 	cd Carsties
 	dotnet new sln
 	
-	- Create Services
+	- Create AuctionService
 	
 	dotnet new webapi -o src/AuctionService
 	dotnet new webapi -o src/AuctionService --use-controllers # for .Net8
@@ -33,6 +33,7 @@
 	dotnet new webapi -o src/AuctionService --use-controllers # for .Net8
 	dotnet sln add src/SearchService
 	
+	- Create Contracts Model
 	dotnet new classlib -o src/Contracts
 	dotnet sln add src/Contracts
 	cd src/AuctionService
@@ -42,7 +43,7 @@
 	
 	
 	
-	- Create IdentityServer project
+	- Create IdentityServer 
 	dotnet new --install Duende.IdentityServer.Templates
 	dotnet new --install Duende.IdentityServer.Templates::6.3.0 # for specific version
 	dotnet new isaspid -o src/IdentityService
@@ -58,6 +59,11 @@
 	cd src/BiddingService
 	dotnet add reference ../../src/Contracts
 	
+	-Create Notification service
+	dotnet new web -o src/NotificationService
+	dotnet sln add src/NotificationService
+		cd src/SearchService
+	dotnet add reference ../../src/Contracts
 - Migrate db
 	cd src/AuctionService
 	
